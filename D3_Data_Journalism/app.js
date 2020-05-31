@@ -20,25 +20,25 @@ var svg = d3.select(".chart")
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  // Import Data
+// Import Data
 d3.csv("data.csv").then(function(data) {
 
-        // Step 1: Parse Data/Cast as numbers
+    // Step 1: Parse Data/Cast as numbers
     // ==============================
     data.forEach(function(data) {
         data.healthcare = +data.healthcare;
         data.poverty = +data.poverty;
-      });
+    });
   
-      // Step 2: Create scale functions
-      // ==============================
-      var xLinearScale = d3.scaleLinear()
-        .domain([20, d3.max(data, d => d.healthcare)])
-        .range([0, width]);
+    // Step 2: Create scale functions
+    // ==============================
+    var xLinearScale = d3.scaleLinear()
+      .domain([20, d3.max(data, d => d.healthcare)])
+      .range([0, width]);
   
-      var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.poverty)])
-        .range([height, 0]);
+    var yLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.poverty)])
+      .range([height, 0]);
 
     // Step 3: Create axis functions
     // ==============================
@@ -91,17 +91,17 @@ d3.csv("data.csv").then(function(data) {
 
     // Create axes labels
     chartGroup.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left + 40)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .attr("class", "axisText")
-    .text("Healthcare");
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Healthcare");
 
-  chartGroup.append("text")
-    .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-    .attr("class", "axisText")
-    .text("Poverty");
-}).catch(function(error) {
-  console.log(error);
-});
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "axisText")
+      .text("Poverty");
+  }).catch(function(error) {
+    console.log(error);
+  });
